@@ -287,7 +287,7 @@ module Main
       exit 1
     end
     
-    File.open(ICS_FILE) do |file|
+    File.open(ICS_FILE, "r:UTF-8") do |file|
       RiCal.parse(file).first.events.each do |e|
         @handlers.each do |handler|
           opts = handler.cached_occurrence_options_for e.recurs? ? true : false #XXX recurs? is not documented!
