@@ -12,11 +12,11 @@ require 'rubygems'
 require 'ri_cal'
 require 'date'
 
-class DateTime
-	class <<self
-		public :today
-	end
-end
+# class DateTime
+# 	class <<self
+# 		public :today
+# 	end
+# end
 
 class LaborTermine 
 	attr_reader "termine"
@@ -32,7 +32,7 @@ class LaborTermine
 		term = Array.new	# array to return (all events)
 		nrterm = Array.new	# array to return (non-recurring events only)
 
-		cals= File.open(ICALFILE, "r")
+		cals= File.open(ICALFILE, "r:UTF-8")
 #		cal = RiCal.parse(cals)
 		Object.instance_eval do
 		      const_set "OldDate", const_get("Date")
@@ -50,7 +50,7 @@ class LaborTermine
 
 			# push non-reccurring event parameters into hash table
 			if !e.recurs? then
-				e.occurrences(:starting => DateTime.today).each{|nre|
+				e.occurrences(:starting => DateTime.now).each{|nre|
 					nrt = Hash.new
 					#puts ":::::::..NON-RECURRING EVENT..:::::::"
 					#puts nre.dtstart
@@ -73,7 +73,7 @@ class LaborTermine
 			end
 
 			# put all relevant occurances of an event
-			e.occurrences(:before => DateTime.today+(14) >> 1, :starting => DateTime.today).each{|re|
+			e.occurrences(:before => DateTime.now+(14) >> 1, :starting => DateTime.now).each{|re|
 				t = Hash.new
 				#puts "::::::::..ANY EVENT..::::::::"
 				#puts re.dtstart
@@ -127,8 +127,8 @@ class LaborTermine
 			t["day"] = "%02d" % t["date"].day.to_s
 			t["month"] = "%02d" % t["date"].mon.to_s
 			t["year"] = t["date"].year.to_s
-			t["hour"] = "%02d" % t["date"].hour.to_s
-			t["min"] = "%02d" % t["date"].min.to_s
+                        t["hour"] = t["date"].respond_to?(:hour) ? "%02d" % t["date"].hour.to_s : ""
+			t["min"]  = t["date"].respond_to?(:min ) ? "%02d" % t["date"].min.to_s : ""
 	
 			# translate numeric day of week to a meaningful string
 			t["wday"] = %w{So Mo Di Mi Do Fr Sa}[t["date"].wday]		
