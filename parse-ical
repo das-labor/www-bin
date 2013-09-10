@@ -12,12 +12,6 @@ require 'rubygems'
 require 'ri_cal'
 require 'date'
 
-# class DateTime
-# 	class <<self
-# 		public :today
-# 	end
-# end
-
 class LaborTermine 
 	attr_reader "termine"
 	attr_reader "nrtermine"
@@ -33,7 +27,6 @@ class LaborTermine
 		nrterm = Array.new	# array to return (non-recurring events only)
 
 		cals= File.open(ICALFILE, "r:UTF-8")
-#		cal = RiCal.parse(cals)
 		Object.instance_eval do
 		      const_set "OldDate", const_get("Date")
 		      remove_const "Date"
