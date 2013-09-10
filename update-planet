@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /srv/www.das-labor.org/bin/planet
+python planet.py config.ini
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+WWWPATH=/srv/www.das-labor.org/htdoc/
+
+cd /srv/www.das-labor.org/bin/parse-labor-wiki-termine
+
+./parse-wiki $WWWPATH
+./update-web $WWWPATH

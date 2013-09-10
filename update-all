@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cd /srv/www.das-labor.org/bin
+# ~/bin/update-gallery
+./update-planet > /dev/null
+#./update-sitemap
+#./update-termine > /dev/null
+#../htdoc/ical/parse.sh # messes up links in the one or the other event. HTML is now again generated from the xml
+wget --no-check-certificate -O /srv/www.das-labor.org/htdoc/termine.ics https://anonymous:labor@www.das-labor.org/davical/caldav.php/labor-termine/home/ # get the ical file to publish and parse
+./parse-ical
+
+# update rss & html
+cd /srv/www.das-labor.org/bin/parse-labor-wiki-termine
+./update-web /srv/www.das-labor.org/htdoc/
+./update-rss_talks /srv/www.das-labor.org/htdoc/
+cd /srv/www.das-labor.org/bin/
+./update-ics-rss-htmlsnippet.rb

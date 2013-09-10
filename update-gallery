@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /home/laborant/www.das-labor.org/ppool/galleries
+rsync -zvur --safe-links -e ssh laborant@rl.das-labor.org:/data/musicverse/public-photo-galleries/ /home/laborant/www.das-labor.org/ppool/galleries/ 
+cd ~/www.das-labor.org/ppool/
+./ubershowcase
