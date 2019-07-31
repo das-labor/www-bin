@@ -5,31 +5,31 @@ require 'date'
 
 LOOKAHEAD=20    # Tage in die Zukunft gucken.
 LOOKPAST=1      # alte Termine weiter anzeigen (Tage)
-XMLSOURCE=ARGV[0]+"/termine.xml";
+XMLSOURCE=ARGV[0]+"/termine.xml"
 
 class Termin
-  attr_reader :day, :wday, :month, :year, :text, :link, :date, :datestr, :hour, :min;
+  attr_reader :day, :wday, :month, :year, :text, :link, :date, :datestr, :hour, :min
 
   def initialize(xml)
-    @day   = xml.elements["day"].text.to_i;
-    @wday  = xml.elements["wday"].text;
-    @month = xml.elements["month"].text.to_i;
-    @year  = xml.elements["year"].text.to_i;
-    @text  = xml.elements["text"].text;
-    @link  = xml.elements["link"].text;
-    @hour  = xml.elements["hour"].text.to_i;
-    @min   = xml.elements["min"].text;
+    @day   = xml.elements["day"].text.to_i
+    @wday  = xml.elements["wday"].text
+    @month = xml.elements["month"].text.to_i
+    @year  = xml.elements["year"].text.to_i
+    @text  = xml.elements["text"].text
+    @link  = xml.elements["link"].text
+    @hour  = xml.elements["hour"].text.to_i
+    @min   = xml.elements["min"].text
     
-    @year += 2000 if @year < 2000;
+    @year += 2000 if @year < 2000
 
-    @date  = Date.new( @year, @month, @day );
+    @date  = Date.new( @year, @month, @day )
     @month = @date.strftime("%m") 
     @day = @date.strftime("%d") 
     @datestr = "#{@day}.#{@month}.#{@year} (#{@wday})"
   end
 
   def to_s
-    return @datestr + " - " + @text;
+    return @datestr + " - " + @text
   end
 end
 
@@ -40,7 +40,7 @@ doc = REXML::Document.new( File.new( XMLSOURCE ));
 at = Array.new
 
 doc.elements.each("/termine/termin") { |tx|
-    at.push(Termin.new(tx));
+    at.push(Termin.new(tx))
 }
 
 
@@ -51,8 +51,8 @@ at.sort!{ |a,b| a.date <=> b.date }  # sortiere liste
 termine = Array.new;
 at.each { |t|
   if ((Date.today+LOOKAHEAD) > t.date) and (t.date > (Date.today-LOOKPAST)) then
-    termine.push(t);
-   end;
+    termine.push(t)
+   end
 }
 
 puts "Choosing Termine..."
@@ -64,7 +64,7 @@ termine.each { |t|
 ##############################################################################
 # HTML Output ################################################################
 puts "Generating html..."
-htmlout = File.new( ARGV[0]+"/termine_html", "w" );
+htmlout = File.new( ARGV[0]+"/termine_html", "w" )
 termine.each { |term|
     if term.date == Date.today then
      htmlout.puts "<b><a href=\"#{term.link}\">#{term.day}.#{term.month}.#{term.year} (#{term.wday}) #{term.hour}:#{term.min} - #{term.text}</a></b><br/>"

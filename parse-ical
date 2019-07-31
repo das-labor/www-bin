@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 # coding: utf-8
 
-XMLFILE="/srv/www.das-labor.org/htdoc/termine.xml";
-NRXMLFILE="/srv/www.das-labor.org/htdoc/talksworkshops.xml";
-ANNXMLFILE="/srv/www.das-labor.org/htdoc/announce.xml";
-ICALFILE="/srv/www.das-labor.org/htdoc/termine.ics";
-#ICALFILE="./termine.ics";
+XMLFILE="/srv/www.das-labor.org/htdoc/termine.xml"
+NRXMLFILE="/srv/www.das-labor.org/htdoc/talksworkshops.xml"
+ANNXMLFILE="/srv/www.das-labor.org/htdoc/announce.xml"
+ICALFILE="/srv/www.das-labor.org/htdoc/termine.ics"
+#ICALFILE="./termine.ics"
 
 #############################################################################
 # Starts Here
@@ -165,8 +165,8 @@ end
 # MAIN
 
 
-lt = LaborTermine.new;	# create instance
-lt.run;	# run the parser
+lt = LaborTermine.new	# create instance
+lt.run	# run the parser
 
 
 puts "Alle Termine:"
