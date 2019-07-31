@@ -3,6 +3,7 @@
 
 XMLFILE="/srv/www.das-labor.org/htdoc/termine.xml";
 NRXMLFILE="/srv/www.das-labor.org/htdoc/talksworkshops.xml";
+ANNXMLFILE="/srv/www.das-labor.org/htdoc/announce.xml";
 ICALFILE="/srv/www.das-labor.org/htdoc/termine.ics";
 #ICALFILE="./termine.ics";
 
@@ -184,6 +185,20 @@ File.open( XMLFILE, "w" ) { |f|
 
 puts "Vorträge und Workshops:"
 File.open( NRXMLFILE, "w" ) { |f|
+  f.puts "<termine>"
+  lt.nrtermine.each { |termin|
+    puts "#{termin["day"]}.#{termin["month"]}.#{termin["year"]} #{termin["hour"]}:#{termin["min"]} #{termin["text"]}"
+    f.puts "<termin>"
+      termin.each { |key,val|
+        f.puts "  <#{key}>#{val}</#{key}>"
+    	}
+    f.puts "</termin>"
+  }
+  f.puts "</termine>"
+}
+
+puts "Veranstaltungsankündigung:"
+File.open( ANNXMLFILE, "w" ) { |f|
   f.puts "<termine>"
   lt.nrtermine.each { |termin|
     puts "#{termin["day"]}.#{termin["month"]}.#{termin["year"]} #{termin["hour"]}:#{termin["min"]} #{termin["text"]}"

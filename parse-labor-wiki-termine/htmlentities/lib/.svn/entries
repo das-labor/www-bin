@@ -1,0 +1,44 @@
+8
+
+dir
+1455
+https://roulette.das-labor.org/svn/tools/parse-labor-wiki-termine/htmlentities/lib
+https://roulette.das-labor.org/svn
+
+
+
+2006-07-20T22:00:29.357836Z
+965
+joerg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b1d182e4-1ff8-0310-901f-bddb46175740
+
+htmlentities
+dir
+
+htmlentities.rb
+file
+
+
+
+
+2006-07-20T21:45:34.000000Z
+2aeb3482a6a1cd88ec08071070d4332b
+2006-07-20T22:00:29.357836Z
+965
+joerg
+has-props
+

@@ -1,0 +1,99 @@
+8
+
+dir
+1455
+https://roulette.das-labor.org/svn/tools/parse-labor-wiki-termine/htmlentities
+https://roulette.das-labor.org/svn
+
+
+
+2006-07-20T22:00:29.357836Z
+965
+joerg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b1d182e4-1ff8-0310-901f-bddb46175740
+
+test
+dir
+
+setup.rb
+file
+
+
+
+
+2006-07-20T21:45:34.000000Z
+ae8479f93e8b7431a940fd96ac7d08ea
+2006-07-20T22:00:29.357836Z
+965
+joerg
+has-props
+
+lib
+dir
+
+CHANGES
+file
+
+
+
+
+2006-07-20T21:45:34.000000Z
+36e03502ce3186eacd4a1aa0a53ced98
+2006-07-20T22:00:29.357836Z
+965
+joerg
+has-props
+
+COPYING
+file
+
+
+
+
+2006-07-20T21:45:34.000000Z
+020c996b619c6a85f812c373622d89ac
+2006-07-20T22:00:29.357836Z
+965
+joerg
+has-props
+
+htmlentities.gemspec
+file
+
+
+
+
+2006-07-20T21:45:34.000000Z
+7293a770168daa300ae696118a638a98
+2006-07-20T22:00:29.357836Z
+965
+joerg
+has-props
+
+README
+file
+
+
+
+
+2006-07-20T21:45:34.000000Z
+98e86468a48e2dd9d6aad60a01c9b14d
+2006-07-20T22:00:29.357836Z
+965
+joerg
+has-props
+

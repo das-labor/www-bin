@@ -28,7 +28,7 @@ module Main
   cmdstr_part = %Q{curl #{ICS_FETCH_OPTIONS} -o}
   #Fetch command: array of arguments to Kernel#system
   ICS_FETCH_COMMAND = cmdstr_part.split(/\s+/) << ICS_FILE <<
-    'http://anonymous:labor@www.das-labor.org/davical/caldav.php/labor-termine/home/'
+   'http://anonymous:labor@www.das-labor.org/davical/caldav.php/labor-termine/home/'
 end
 
 ###CONFIG end
@@ -281,16 +281,19 @@ module Main
   @handlers = []
   
   def self.run
-    if !system(*ICS_FETCH_COMMAND)
-      $stderr << "ERROR: Unable to fetch .ics file, process exited with status #{$?.exitstatus}:\n" <<
-        "Subprocess was: #{ICS_FETCH_COMMAND.join ' '}\n"
-      exit 1
-    end
+    #if !system(*ICS_FETCH_COMMAND)
+    #  $stderr << "ERROR: Unable to fetch .ics file, process exited with status #{$?.exitstatus}:\n" <<
+    #    "Subprocess was: #{ICS_FETCH_COMMAND.join ' '}\n"
+    #  exit 1
+    #end
     
     File.open(ICS_FILE, "r:UTF-8") do |file|
       RiCal.parse(file).first.events.each do |e|
         @handlers.each do |handler|
           opts = handler.cached_occurrence_options_for e.recurs? ? true : false #XXX recurs? is not documented!
+          if e.dtstart.nil?
+            next
+          end
           e.occurrences(opts).each do |evt|
             handler.event evt
           end unless opts.nil?
