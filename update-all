@@ -10,7 +10,9 @@ cd /srv/www.das-labor.org/bin
 # > /dev/null to mute output so we don't get a big mail every day
 
 wget -q -O /srv/www.das-labor.org/htdoc/termine.ics 'https://wiki.das-labor.org/w/Spezial:Semantische_Suche/-5B-5Bev_title::%2B-5D-5D-20-5B-5Bev_start::%2B-5D-5D/-3FEv-20title%3Dsummary/-3FEv-20start%3Dstart/-3FEv-20end%3Dend/-3FEv-20place%3Dlocation/-3FEv-20abstract%3Ddescription/format%3Dicalendar/searchlabel%3DExport-20for-20iCalendar/title%3DAlle-20Termine/description%3DAll-20events/offset%3D0/limit%3D5000' > /dev/null
-
+# append timezone after calendar description
+sed -e '/X-WR-CALDESC/ a X-WR-TIMEZONE:Europe/Berlin' -i \
+  /srv/www.das-labor.org/htdoc/termine.ics
 ./parse-ical > /dev/null
 
 # update rss & html
