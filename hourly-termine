@@ -15,3 +15,7 @@ cd /srv/www.das-labor.org/bin/parse-labor-wiki-termine
 cd /srv/www.das-labor.org/bin/
 ./update-ics-rss-htmlsnippet.rb > /dev/null
 
+# append timezone after calendar description
+sed -e '/X-WR-CALDESC/a X-WR-TIMEZONE:Europe/Berlin' -i \
+  /srv/www.das-labor.org/htdoc/termine.ics
+  
