@@ -176,7 +176,7 @@ File.open( XMLFILE, "w" ) { |f|
     puts "#{termin["day"]}.#{termin["month"]}.#{termin["year"]} #{termin["hour"]}:#{termin["min"]} #{termin["text"]}"
     f.puts "<termin>"
       termin.each { |key,val|
-        f.puts "  <#{key}>#{val}</#{key}>"
+        f.puts "  <#{key}>#{val.encode(xml: :text)}</#{key}>"
     	}
     f.puts "</termin>"
   }
@@ -190,7 +190,7 @@ File.open( NRXMLFILE, "w" ) { |f|
     puts "#{termin["day"]}.#{termin["month"]}.#{termin["year"]} #{termin["hour"]}:#{termin["min"]} #{termin["text"]}"
     f.puts "<termin>"
       termin.each { |key,val|
-        f.puts "  <#{key}>#{val}</#{key}>"
+        f.puts "  <#{key}>#{val.encode(xml: :text)}</#{key}>"
     	}
     f.puts "</termin>"
   }
@@ -204,7 +204,7 @@ File.open( ANNXMLFILE, "w" ) { |f|
     puts "#{termin["day"]}.#{termin["month"]}.#{termin["year"]} #{termin["hour"]}:#{termin["min"]} #{termin["text"]}"
     f.puts "<termin>"
       termin.each { |key,val|
-        f.puts "  <#{key}>#{val}</#{key}>"
+        f.puts "  <#{key}>#{val.encode(xml: :text)}</#{key}>"
     	}
     f.puts "</termin>"
   }
