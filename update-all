@@ -1,25 +1,28 @@
 #!/bin/sh
 
+OUTPUT=/dev/null
+#OUTPUT=/dev/stdout
+
 cd /srv/www.das-labor.org/bin
 # ~/bin/update-gallery
-#./update-planet > /dev/null
-#./update-termine > /dev/null
+#./update-planet > "$OUTPUT"
+#./update-termine > "$OUTPUT"
 #../htdoc/ical/parse.sh # messes up links in the one or the other event. HTML is now again generated from the xml
 # wget --no-check-certificate -O /srv/www.das-labor.org/htdoc/termine.ics https://anonymous:labor@www.das-labor.org/davical/caldav.php/labor-termine/home/ # get the ical file to publish and parse
 
 # > /dev/null to mute output so we don't get a big mail every day
 
-wget -q -O /srv/www.das-labor.org/htdoc/termine.ics 'https://wiki.das-labor.org/w/Spezial:Semantische_Suche/-5B-5Bev_title::%2B-5D-5D-20-5B-5Bev_start::%2B-5D-5D/-3FEv-20title%3Dsummary/-3FEv-20start%3Dstart/-3FEv-20end%3Dend/-3FEv-20place%3Dlocation/-3FEv-20abstract%3Ddescription/format%3Dicalendar/searchlabel%3DExport-20for-20iCalendar/title%3DAlle-20Termine/description%3DAll-20events/offset%3D0/limit%3D5000' > /dev/null
+wget -q -O /srv/www.das-labor.org/htdoc/termine.ics 'https://wiki.das-labor.org/w/Spezial:Semantische_Suche/-5B-5Bev_title::%2B-5D-5D-20-5B-5Bev_start::%2B-5D-5D/-3FEv-20title%3Dsummary/-3FEv-20start%3Dstart/-3FEv-20end%3Dend/-3FEv-20place%3Dlocation/-3FEv-20abstract%3Ddescription/format%3Dicalendar/searchlabel%3DExport-20for-20iCalendar/title%3DAlle-20Termine/description%3DAll-20events/offset%3D0/limit%3D5000' > "$OUTPUT"
 
-./parse-ical > /dev/null
+./parse-ical > "$OUTPUT"
 
 # update rss & html
 cd /srv/www.das-labor.org/bin/parse-labor-wiki-termine
-./update-web /srv/www.das-labor.org/htdoc/ > /dev/null
-./update-rss_talks /srv/www.das-labor.org/htdoc/ > /dev/null
-./update-announce /srv/www.das-labor.org/htdoc/ > /dev/null
+./update-web /srv/www.das-labor.org/htdoc/ > "$OUTPUT"
+./update-rss_talks /srv/www.das-labor.org/htdoc/ > "$OUTPUT"
+./update-announce /srv/www.das-labor.org/htdoc/ > "$OUTPUT"
 cd /srv/www.das-labor.org/bin/
-./update-ics-rss-htmlsnippet.rb > /dev/null
+./update-ics-rss-htmlsnippet.rb > "$OUTPUT"
 
 # append timezone after calendar description
 sed -e '/X-WR-CALDESC/a X-WR-TIMEZONE:Europe/Berlin' -i \
