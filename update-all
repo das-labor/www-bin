@@ -25,5 +25,6 @@ cd /srv/www.das-labor.org/bin/
 ./update-ics-rss-htmlsnippet.rb > "$OUTPUT"
 
 # append timezone after calendar description
-sed -e '/X-WR-CALDESC/a X-WR-TIMEZONE:Europe/Berlin' -i \
+# also include <CR> so the line ends up with CRLF like everything else in the file
+sed -e '/X-WR-CALDESC/a X-WR-TIMEZONE:Europe/Berlin\r' -i \
   /srv/www.das-labor.org/htdoc/termine.ics
